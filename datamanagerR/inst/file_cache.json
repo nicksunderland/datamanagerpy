@@ -1,0 +1,11 @@
+[
+  {
+    "name": "hermes_summary_stats",
+    "source": "https://personal.broadinstitute.org/ryank/HERMES_Jan2019_HeartFailure_summary_data.txt.zip",
+    "dir_path": "/Users/nicholassunderland/git/thesis/datamanager/inst/extdata/hermes_summary_stats",
+    "data_paths": {
+      "HERMES_Jan2019_HeartFailure_summary_data.txt": "/Users/nicholassunderland/git/thesis/datamanager/inst/extdata/hermes_summary_stats/HERMES_Jan2019_HeartFailure_summary_data.txt"
+    },
+    "created_on": "2023-02-02 22:36:30"
+  }
+]

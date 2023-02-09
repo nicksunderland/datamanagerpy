@@ -1,0 +1,23 @@
+Package: datamanager
+Title: Manages downloading, storing, and retrieval of data files
+Version: 0.0.0.9000
+Authors@R: person(given   = "Nicholas",
+                  family  = "Sunderland",
+                  email   = "nicholas.p.sunderland@gmail.com",
+                  role    = c("aut", "cre"),
+                  comment = c(ORCID = "0000-0003-3625-630X"))
+Description: Manages downloading, storing, and retrieval of data files.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.2
+Imports: 
+    checkmate,
+    httr,
+    jsonlite,
+    purrr,
+    TAF,
+    utils
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
