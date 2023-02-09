@@ -1,5 +1,5 @@
-my_env
-downloads
+my_env/*
+downloads/*
 datamanager.Rproj
 .Rproj.user
 .Rhistory
