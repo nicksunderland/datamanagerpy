@@ -10,8 +10,8 @@ import shutil
 from tqdm.auto import tqdm
 import pandas as pd
 import csv
-import cache
-import pkg_utils
+from datamanagerpy import cache
+from datamanagerpy import pkg_utils
 
 class DataFile(object):
   # constructor

@@ -11,6 +11,7 @@ from datamanagerpy.data_file import *
 from datamanagerpy.cache import *
 from datamanagerpy.pkg_utils import *
 
+
 set_config("download_dir_path", "/Users/nicholassunderland/git/thesis/datamanager/downloads")
 DataFile.delete("hermes")
 data_file = DataFile(

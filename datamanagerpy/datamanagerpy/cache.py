@@ -5,7 +5,7 @@ import importlib_resources
 
 
 def cache_path():
-  path = importlib_resources.files('settings').joinpath('cache.json')
+  path = importlib_resources.files('datamanagerpy').joinpath('settings/cache.json')
   return path
 
 def write_cache(cache_in):
