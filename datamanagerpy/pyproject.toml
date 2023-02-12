@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "datamanagerpy"
+version = "0.0.1"
+description = "A package to manage data downloads"
+license = {file = "LICENSE.txt"}
+authors = [
+  {name="Nicholas Sunderland", email="nicholas.sunderland@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+dependencies = [
+    "DateTime==5.0",
+    "decorator==5.1.1",
+    "pandas==1.5.3",
+    "pathlib==1.0.1",
+    "requests==2.28.2",
+    "tqdm==4.64.1",
+    "urllib3==1.26.14",
+    "validators==0.20.0"
+]
+
+[project.urls]
+repository = "https://github.com/nicksunderland/datamanagerpy"
+
+[options]
+packages = ["datamanagerpy"]
+zip_safe = "True"
+include_package_data = "True"

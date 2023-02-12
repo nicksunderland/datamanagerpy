@@ -8,6 +8,8 @@ import functools
 import pathlib
 import shutil
 from tqdm.auto import tqdm
+import pandas as pd
+import csv
 import cache
 import pkg_utils
 
@@ -16,7 +18,7 @@ class DataFile(object):
   def __init__(self, name: str, source: str, overwrite: bool = False):
     # member variables (they are actually functions, the self._ will be the variables)
     
-    if not cache.in_cache(name) or overwrite:
+    if name not in cache.cache() or overwrite:
       cache.delete_cache(name)
       self.name = name
       self.source = source
@@ -43,7 +45,7 @@ class DataFile(object):
   def name(self, value):
     if(not isinstance(value, str)):
       raise ValueError("Exception: name must be a string")
-    if(cache.in_cache(value)):
+    if(value in cache.cache()):
       raise DataFileExistsException("Exception: DataFile name already exists")
     self._name = value
     
@@ -69,9 +71,6 @@ class DataFile(object):
   @property
   def data_paths(self):
     return self._data_paths
-  
-  def get(self, file_name: str):
-    return self._data_paths[file_name]
   
   @property
   def created(self):
@@ -104,7 +103,7 @@ class DataFile(object):
     }
     # Get the cache, append and write out
     cache_alt = cache.cache()
-    cache_alt.append(new_entry)
+    cache_alt[self.name] = new_entry
     cache.write_cache(cache_alt)
 
   def parse_source(self, source: str) -> dict:
@@ -151,6 +150,15 @@ class DataFile(object):
   @staticmethod
   def delete(name: str):
     cache.delete_cache(name)
+    
+  def get(self, file_name: str):
+    try:
+      sniffer = csv.Sniffer()
+      data = open(self._data_paths[file_name], "r").read(4096)
+      delim = sniffer.sniff(data).delimiter
+      return pd.read_csv(self._data_paths[file_name], delimiter=delim)
+    except (IOError, KeyError) as e:
+      print(e)
 
 
 class DataFileExistsException(Exception):

@@ -1,10 +1,11 @@
 import os
 import json
 import shutil
+import importlib_resources
 
 def get_config(value) -> str:
   # The path to the config file
-  config_file_path = os.path.join(os.path.dirname(__file__), "settings/config.json")
+  config_file_path = importlib_resources.files('settings').joinpath('config.json')
   # Read it
   with open(config_file_path, 'r') as f:
     config = json.load(f)
@@ -13,7 +14,7 @@ def get_config(value) -> str:
 
 def set_config(key, value) -> str:
   # The path to the config file
-  config_file_path = os.path.join(os.path.dirname(__file__), "settings/config.json")
+  config_file_path = importlib_resources.files('settings').joinpath('config.json')
   # Read it
   with open(config_file_path, 'r') as f:
     config = json.load(f)

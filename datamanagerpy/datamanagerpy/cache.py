@@ -1,8 +1,11 @@
 import os 
 import json
+import shutil
+import importlib_resources
+
 
 def cache_path():
-  path = os.path.join(os.path.dirname(__file__), "settings/cache.json")
+  path = importlib_resources.files('settings').joinpath('cache.json')
   return path
 
 def write_cache(cache_in):
@@ -15,37 +18,30 @@ def cache() -> list:
     try:
       cache = json.load(f)
     except ValueError:
-      cache = []
+      cache = {}
   # return
   return cache
 
-def in_cache(name: str) -> bool:
-  # Does the name match any in the cache
-  return any([x["name"]==name for x in cache()])
-
 def cache_get(name: str) -> dict:
-  if in_cache(name):
-    c = [x for x in cache() if x["name"]==name]
-    return c[0]
-  else:
+  try:
+    return cache()[name]
+  except KeyError:
     return None
 
 def delete_cache(name: str):
   try:
-    if not in_cache(name):
+    if name not in cache():
       return
     # check with user
     answer = input(f'Warning: about to delete all files associated with: {name}.\nContinue? [y/n]: ')
     # delete
     if answer.lower() in ["y","yes"]:
+      # delete from the cache file
       cache_alt = cache()
-      idx = [index for index, entry in enumerate(cache_alt) if entry["name"]==name]
-      remove = cache_alt.pop(idx[0])
-      # try to delete the data files
-      for fp in remove["data_paths"].values():
-        os.remove(fp)
-      # try to delete the folder
-      os.rmdir(remove["dir_path"])
+      remove = cache_alt[name]
+      del cache_alt[name]
+      # try to delete the data folder and files
+      shutil.rmtree(remove["dir_path"], ignore_errors=True)
       # write out the new cache
       write_cache(cache_alt)
     elif answer.lower() in ["n","no"]:
@@ -53,7 +49,9 @@ def delete_cache(name: str):
     else:
       print("Incorrect input, try again.")
   
-  except IndexError:
+  except KeyError as e:
     print(f'Exception: DataFile not found in cache.')
-  except OSError:
+    print(e)
+  except OSError as e:
     print(f'Exception: problem deleting data files')
+    print(e)

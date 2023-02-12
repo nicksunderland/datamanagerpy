@@ -1,0 +1,13 @@
+LICENSE.txt
+README.md
+pyproject.toml
+datamanagerpy/__init__.py
+datamanagerpy/cache.py
+datamanagerpy/data_file.py
+datamanagerpy/pkg_utils.py
+datamanagerpy.egg-info/PKG-INFO
+datamanagerpy.egg-info/SOURCES.txt
+datamanagerpy.egg-info/dependency_links.txt
+datamanagerpy.egg-info/requires.txt
+datamanagerpy.egg-info/top_level.txt
+tests/test1.py

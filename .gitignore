@@ -1,5 +1,7 @@
 my_env/*
 downloads/*
+datamanagerpy/build/*
+datamanagerpy/dist/*
 datamanager.Rproj
 .Rproj.user
 .Rhistory
